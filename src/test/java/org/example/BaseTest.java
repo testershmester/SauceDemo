@@ -1,14 +1,12 @@
 package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.example.pages.CartPage;
-import org.example.pages.HeaderPage;
-import org.example.pages.LoginPage;
-import org.example.pages.ProductsPage;
+import org.example.pages.*;
 import org.example.steps.LoginSteps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -24,6 +22,8 @@ public class BaseTest {
     ProductsPage productsPage;
     HeaderPage headerPage;
     CartPage cartPage;
+    CheckoutPage checkoutPage;
+    CheckoutOverviewPage checkoutOverviewPage;
     LoginSteps loginSteps;
 
     @BeforeMethod
@@ -42,6 +42,8 @@ public class BaseTest {
         cartPage = new CartPage(driver);
         //Steps
         loginSteps = new LoginSteps(driver);
+        checkoutPage = new CheckoutPage(driver);
+        checkoutOverviewPage = new CheckoutOverviewPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)

@@ -1,6 +1,9 @@
 package org.example;
 
+import org.example.utils.PropertiesLoader;
 import org.testng.annotations.Test;
+
+import java.util.Properties;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -38,6 +41,14 @@ public class LoginTest extends BaseTest {
     public void userShouldNotBeLoggedInBeWithInvalidUserName() {
         loginSteps.login("standard_user1", "secret_sauce");
         String expected = "Epic sadface: Username and password do not match any user in this service";
+        assertEquals(loginPage.getError(), expected, "The error is incorrect");
+    }
+
+    @Test
+    public void lockedOutUserShouldNotBeLoggedIn() {
+        Properties properties = PropertiesLoader.loadProperties("locked_out_user.properties");
+        loginSteps.login(properties.getProperty("username"), properties.getProperty("password"));
+        String expected = "Epic sadface: Sorry, this user has been locked out.";
         assertEquals(loginPage.getError(), expected, "The error is incorrect");
     }
 }
