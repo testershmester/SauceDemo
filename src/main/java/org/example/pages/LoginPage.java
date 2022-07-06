@@ -3,31 +3,24 @@ package org.example.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.NoSuchElementException;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class LoginPage extends BasePage {
 
+    private static final String LOGIN_BUTTON_ID = "login-button";
+
     @FindBy(id = "user-name")
-    @CacheLookup
     private WebElement userNameInput;
+
     @FindBy(id = "password")
-    @CacheLookup
     private WebElement passwordInput;
-    @FindBy(id = "login-button")
-    @CacheLookup
+
+    @FindBy(id = LOGIN_BUTTON_ID)
     private WebElement loginButton;
-    @FindBy(css = "h3[data-test=error]")
+
+    @FindBy(css = "[data-test=error]")
     private WebElement error;
 
     public LoginPage(WebDriver driver) {
@@ -35,23 +28,29 @@ public class LoginPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void open() {
-        driver.get(BASE_URL);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-button")));
+    public By getLoginButtonLocator() {
+        return By.id(LOGIN_BUTTON_ID);
     }
 
-    public void login(String user, String password) {
-        userNameInput.sendKeys(user);
+    public void open() {
+        driver.get(baseUrl);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getLoginButtonLocator()));
+    }
+
+    public void fillInUserName(String userName) {
+        userNameInput.sendKeys(userName);
+    }
+
+    public void fillInPassword(String password) {
         passwordInput.sendKeys(password);
+    }
+
+    public void submitForm() {
         loginButton.submit();
     }
 
-    public void loginAsStandardUser() {
-        login("standard_user", "secret_sauce");
-    }
-
-    public void loginAsGlitchUser() {
-        login("performance_glitch_user", "secret_sauce");
+    public boolean isLoginButtonDisplayed() {
+        return loginButton.isDisplayed();
     }
 
     public String getError() {

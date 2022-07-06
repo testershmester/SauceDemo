@@ -5,6 +5,7 @@ import org.example.pages.CartPage;
 import org.example.pages.HeaderPage;
 import org.example.pages.LoginPage;
 import org.example.pages.ProductsPage;
+import org.example.steps.LoginSteps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,6 +24,7 @@ public class BaseTest {
     ProductsPage productsPage;
     HeaderPage headerPage;
     CartPage cartPage;
+    LoginSteps loginSteps;
 
     @BeforeMethod
     public void setUp() {
@@ -33,11 +35,13 @@ public class BaseTest {
         //Set up driver settings
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        //Create pages
+        //Pages
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         headerPage = new HeaderPage(driver);
         cartPage = new CartPage(driver);
+        //Steps
+        loginSteps = new LoginSteps(driver);
     }
 
     @AfterMethod(alwaysRun = true)
@@ -46,13 +50,4 @@ public class BaseTest {
             driver.quit();
         }
     }
-
-    public void waitForPageLoaded() {
-        new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver driver) {
-                return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete");
-            }
-        };
-    }
-
 }
