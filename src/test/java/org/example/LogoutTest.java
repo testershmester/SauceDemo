@@ -10,6 +10,7 @@ public class LogoutTest extends BaseTest {
 
     @Test
     public void logoutInBurgerMenuShouldLogoutUser() {
+        System.out.println(Thread.currentThread().getId());
         loginSteps.loginAsDefaultUser();
         headerPage.openBurgerMenu();
         headerPage.logout();

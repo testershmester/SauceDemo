@@ -5,9 +5,10 @@ import org.example.pages.*;
 import org.example.steps.LoginSteps;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -23,11 +24,20 @@ public class BaseTest {
     CheckoutOverviewPage checkoutOverviewPage;
     LoginSteps loginSteps;
 
-    @BeforeMethod
-    public void setUp() {
-        //Initialize web driver and create driver instance
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+    @Parameters("browser")
+    @BeforeMethod()
+    public void setUp(@Optional("chrome") String browser) {
+        if (browser.equals("chrome")) {
+            //Initialize web driver and create driver instance
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.setHeadless(true);
+            driver = new ChromeDriver(options);
+        } else if (browser.equals("edge")) {
+            WebDriverManager.edgedriver().setup();
+            driver = new EdgeDriver();
+        }
+
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         //Set up driver settings
         driver.manage().window().maximize();
