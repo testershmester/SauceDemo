@@ -29,7 +29,6 @@ public class LoginTest extends BaseTest {
         };
     }
 
-    @Ignore
     @Test(dataProvider = "Data provider for tests with different invalid users")
     public void userShouldNotLoginWithInvalidData(String username, String password, String error) {
         loginSteps.login(username, password);
