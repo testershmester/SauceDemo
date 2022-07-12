@@ -13,7 +13,6 @@ public class ProductsTest extends BaseTest {
 
     @Test
     public void productShouldBeAddedToCart() {
-        System.out.println(Thread.currentThread().getId());
         loginSteps.loginAsDefaultUser();
         productsPage.addToCart(SAUCE_LABS_BACKPACK);
         headerPage.openCart();
