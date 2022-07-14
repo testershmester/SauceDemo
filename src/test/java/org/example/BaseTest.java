@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.time.Duration;
@@ -26,7 +27,7 @@ public class BaseTest {
 
     @Parameters("browser")
     @BeforeMethod()
-    public void setUp(@Optional("chrome") String browser) {
+    public void setUp(@Optional("chrome") String browser, ITestContext context) {
         if (browser.equals("chrome")) {
             //Initialize web driver and create driver instance
             WebDriverManager.chromedriver().setup();
@@ -42,6 +43,8 @@ public class BaseTest {
         //Set up driver settings
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        //Set driver in context
+        context.setAttribute("driver", driver);
         //Pages
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
