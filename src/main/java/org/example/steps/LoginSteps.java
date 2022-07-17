@@ -1,5 +1,6 @@
 package org.example.steps;
 
+import io.qameta.allure.Step;
 import org.example.pages.LoginPage;
 import org.example.utils.PropertiesLoader;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +21,7 @@ public class LoginSteps {
         loginPage = new LoginPage(webDriver);
     }
 
+    @Step("Login as {user} with {password}")
     public void login(String user, String password) {
         loginPage.open();
         loginPage.fillInUserName(user);
@@ -27,6 +29,7 @@ public class LoginSteps {
         loginPage.submitForm();
     }
 
+    @Step("Login as standard user")
     public void loginAsStandardUser() {
         Properties properties = PropertiesLoader.loadProperties(STANDARD_USER_PROPERTIES);
         login(properties.getProperty(USERNAME), properties.getProperty(PASSWORD));

@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +19,6 @@ public class CartPage extends BasePage {
     private WebElement continueShoppingButton;
     @FindBy(xpath = "//div[@class='inventory_item_name']")
     private List<WebElement> allProductsInCart;
-
 
     private final String productInCart = "//div[text()='%s']//ancestor::div[@class='cart_item']";
     private final String removeButton = "//div[text()='%s']//ancestor::div[@class='cart_item']//button[text()='Remove']";
@@ -41,6 +41,7 @@ public class CartPage extends BasePage {
         checkout.click();
     }
 
+    @Step("Remove product {productName} from cart")
     public void removeProductFromCart(String productName) {
         driver.findElement(By.xpath(String.format(removeButton, productName))).click();
     }
