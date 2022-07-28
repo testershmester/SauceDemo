@@ -1,6 +1,7 @@
 package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.extern.log4j.Log4j2;
 import org.example.pages.*;
 import org.example.steps.LoginSteps;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
+@Log4j2
 public class BaseTest {
 
     WebDriver driver;
@@ -35,7 +37,9 @@ public class BaseTest {
             //Initialize web driver and create driver instance
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-            options.setHeadless(Boolean.getBoolean(System.getProperty("isHeadless", "false")));
+            String property = System.getProperty("isHeadless");
+            log.info("isHeadless was set to {}", property);
+            options.setHeadless(Boolean.getBoolean(property));
             driver = new ChromeDriver(options);
         } else if (browser.equals("edge")) {
             WebDriverManager.edgedriver().setup();
