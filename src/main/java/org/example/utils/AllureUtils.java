@@ -11,4 +11,14 @@ public class AllureUtils {
     public static byte[] takeScreenshot(WebDriver driver) {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
+
+//    @Attachment(value = "Browser console log", type = "text/plain")
+//    private static String addConsoleLogToReport() {
+//        StringBuilder sb = new StringBuilder();
+//        for (Object line : logList) {
+//            sb.append(line);
+//            sb.append("\t");
+//        }
+//        return sb.toString();
+//    }
 }

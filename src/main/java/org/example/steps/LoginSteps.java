@@ -32,7 +32,8 @@ public class LoginSteps {
     @Step("Login as standard user")
     public void loginAsStandardUser() {
         Properties properties = PropertiesLoader.loadProperties(STANDARD_USER_PROPERTIES);
-        login(properties.getProperty(USERNAME), properties.getProperty(PASSWORD));
+        login(System.getProperty(USERNAME, properties.getProperty(USERNAME)),
+              System.getProperty(PASSWORD, properties.getProperty(PASSWORD)));
     }
 
     public void loginAsDefaultUser() {

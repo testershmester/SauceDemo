@@ -35,7 +35,6 @@ public class CartTest extends BaseTest {
         loginSteps.loginAsDefaultUser();
         headerPage.openCart();
         cartPage.checkout();
-        Assert.fail("Fail for screenshot");
         assertEquals(checkoutPage.getTitle().getText(), "CHECKOUT: YOUR INFORMATION", "The checkout button does not open checkout page");
     }
 }
