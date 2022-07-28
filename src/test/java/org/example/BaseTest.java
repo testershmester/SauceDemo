@@ -39,11 +39,8 @@ public class BaseTest {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             String isHeadless = System.getenv("isHeadless");
-            String user = System.getenv("standard_user");
-            String value = System.getenv("66a23836-a761-45e9-9fe0-c6be97aab61a");
-            log.info("Is headless browser? - {}", isHeadless);
-            log.info("User? - {}", user);
-            log.info("User? - {}", value);
+            log.info("User? - {}", System.getenv("66a23836-a761-45e9-9fe0-c6be97aab61a"));
+            log.info("User? - {}", System.getProperty("66a23836-a761-45e9-9fe0-c6be97aab61a"));
             options.setHeadless(isHeadless != null && Boolean.parseBoolean(isHeadless));
             driver = new ChromeDriver(options);
         } else if (browser.equals("edge")) {
