@@ -38,11 +38,11 @@ public class BaseTest {
             //Initialize web driver and create driver instance
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-            Properties properties = System.getProperties();
-            log.info("all properties {}", properties.keys());
-            log.info("all properties {}", System.getProperty("isHeadless"));
-            log.info("all properties {}", System.getenv("isHeadless"));
-            options.setHeadless(true);
+            String isHeadless = System.getenv("isHeadless");
+            String user = System.getenv("user");
+            log.info("Is headless browser? - {}", isHeadless);
+            log.info("User? - {}", user);
+            options.setHeadless(isHeadless != null && Boolean.parseBoolean(isHeadless));
             driver = new ChromeDriver(options);
         } else if (browser.equals("edge")) {
             WebDriverManager.edgedriver().setup();
