@@ -1,5 +1,6 @@
 package org.example.utils.testng;
 
+import lombok.extern.log4j.Log4j2;
 import org.example.utils.AllureUtils;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.WebDriver;
@@ -9,11 +10,12 @@ import org.testng.ITestResult;
 
 import java.util.concurrent.TimeUnit;
 
+@Log4j2
 public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        System.out.println(String.format("======================================== STARTING TEST %s ========================================", iTestResult.getName()));
+        log.info("======================================== STARTING TEST {} ========================================", iTestResult.getName());
     }
 
     @Override
