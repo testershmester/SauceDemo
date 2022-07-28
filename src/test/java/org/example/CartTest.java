@@ -25,7 +25,7 @@ public class CartTest extends BaseTest {
         loginSteps.loginAsDefaultUser();
         headerPage.openCart();
         cartPage.continueShopping();
-        assertFalse(productsPage.getTitle().isDisplayed(), "The continue shopping button does not redirect to the product page");
+        assertTrue(productsPage.getTitle().isDisplayed(), "The continue shopping button does not redirect to the product page");
     }
 
     @Story("Fast checkout")
