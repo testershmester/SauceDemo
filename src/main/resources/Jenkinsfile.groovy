@@ -19,17 +19,17 @@ pipeline {
                 bat "mvn clean test -DsuiteXmlFile=src/main/resources/smoke.xml"
             }
         }
-    }
-    stage('Allure') {
-        steps {
-            script {
-                 allure([
-                         includeProperties: false,
-                         jdk: '',
-                         properties: [],
-                         reportBuildPolicy: 'ALWAYS',
-                         results: [[path: 'target/allure-results']]
-                 ])
+        stage('Allure') {
+            steps {
+                script {
+                    allure([
+                            includeProperties: false,
+                            jdk              : '',
+                            properties       : [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results          : [[path: 'target/allure-results']]
+                    ])
+                }
             }
         }
     }
