@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'reporting_demonstration', url: 'https://github.com/testershmester/SauceDemo.git'
+                git branch: 'jenkins_creds_pipeline', url: 'https://github.com/testershmester/SauceDemo.git'
 
                 // Run Maven on a Unix agent.
                 // sh "mvn clean test -DsuiteXmlFile=src/main/resources/smoke.xml"
