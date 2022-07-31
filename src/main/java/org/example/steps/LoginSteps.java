@@ -36,7 +36,7 @@ public class LoginSteps {
         String userName = System.getenv("username_var");
         String password = System.getenv("password_var");
         log.info("User is {}, password is {}", userName, password);
-        log.info("Test log", userName, password);
+        log.info("Test log");
         login(userName, password);
     }
 
