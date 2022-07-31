@@ -6,6 +6,8 @@ pipeline {
         maven "3.8.6"
     }
 
+    properties([parameters([gitParameter(branch: '', branchFilter: '.*', defaultValue: 'master', name: 'branch', type: 'GitParameterDefinition')])])
+
     stages {
         stage('Build') {
             steps {
@@ -22,13 +24,11 @@ pipeline {
         stage('Allure') {
             steps {
                 script {
-                    allure([
-                            includeProperties: false,
+                    allure([includeProperties: false,
                             jdk              : '',
                             properties       : [],
                             reportBuildPolicy: 'ALWAYS',
-                            results          : [[path: 'target/allure-results']]
-                    ])
+                            results          : [[path: 'target/allure-results']]])
                 }
             }
         }
