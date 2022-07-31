@@ -6,7 +6,7 @@ pipeline {
         maven "3.8.6"
     }
 
-    properties([
+    options([
             parameters([
                     gitParameter(branch: '',
                             branchFilter: 'origin/(.*)',
