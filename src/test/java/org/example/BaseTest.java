@@ -16,7 +16,6 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import java.time.Duration;
-import java.util.Properties;
 
 @Log4j2
 public class BaseTest {
@@ -39,9 +38,8 @@ public class BaseTest {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             String isHeadless = System.getenv("isHeadless");
-            log.info("username? - {}", System.getenv("username"));
-            log.info("password? - {}", System.getenv("password"));
-            options.setHeadless(isHeadless != null && Boolean.parseBoolean(isHeadless));
+            log.info("The parameter \"isHeadless\" is set to {}", isHeadless);
+            options.setHeadless(Boolean.parseBoolean(isHeadless));
             driver = new ChromeDriver(options);
         } else if (browser.equals("edge")) {
             WebDriverManager.edgedriver().setup();
