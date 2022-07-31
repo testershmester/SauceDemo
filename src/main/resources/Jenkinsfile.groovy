@@ -6,13 +6,26 @@ pipeline {
         maven "3.8.6"
     }
 
-    properties([parameters([gitParameter(branch: '', branchFilter: '.*', defaultValue: 'master', name: 'branch', type: 'GitParameterDefinition')])])
+    properties([
+            parameters([
+                    gitParameter(branch: '',
+                            branchFilter: 'origin/(.*)',
+                            defaultValue: 'master',
+                            description: '',
+                            name: 'BRANCH',
+                            quickFilterEnabled: false,
+                            selectedValue: 'NONE',
+                            sortMode: 'NONE',
+                            tagFilter: '*',
+                            type: 'PT_BRANCH')
+            ])
+    ])
 
     stages {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'jenkins_creds_pipeline', url: 'https://github.com/testershmester/SauceDemo.git'
+                git branch: "${params.BRANCH}", url: 'https://github.com/testershmester/SauceDemo.git'
 
                 // Run Maven on a Unix agent.
                 // sh "mvn clean test -DsuiteXmlFile=src/main/resources/smoke.xml"
