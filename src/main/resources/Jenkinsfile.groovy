@@ -13,8 +13,8 @@ pipeline {
 
     stages {
         stage('Build') {
-            withCredentials([string(credentialsId: '${params.CREDS}', usernameVariable: 'username_var', passwordVariable: 'password_var')]) {
-                steps {
+            steps {
+                withCredentials([string(credentialsId: '${params.CREDS}', usernameVariable: 'username_var', passwordVariable: 'password_var')]) {
                     // Get some code from a GitHub repository
                     git branch: "${params.BRANCH}", url: 'https://github.com/testershmester/SauceDemo.git'
 
