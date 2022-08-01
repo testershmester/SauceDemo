@@ -111,7 +111,7 @@
                         </property>
                     </systemProperties>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                        <suiteXmlFile>src/main/resources/${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
                 <dependencies>
