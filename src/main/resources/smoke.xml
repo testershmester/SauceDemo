@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Multithreading" parallel="tests" thread-count="2">
+<suite name="Smoke">
     <listeners>
         <listener class-name="org.example.utils.testng.TestListener"/>
     </listeners>
     <test name="Chrome">
         <parameter name="browser" value="chrome"/>
-        <classes>
-            <class name="org.example.LoginTest"/>
-            <class name="org.example.CartTest"/>
-            <class name="org.example.ProductsTest"/>
-        </classes>
-    </test>
-    <test name="Edge">
-        <parameter name="browser" value="edge"/>
-        <classes>
-            <class name="org.example.CartTest"/>
+           <classes>
+               <class name="org.example.LoginTest">
+                   <methods>
+                       <include name="userShouldLoginWithValidCredentials"/>
+                   </methods>
+               </class>
         </classes>
     </test>
 </suite>
