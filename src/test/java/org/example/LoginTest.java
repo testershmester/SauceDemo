@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.utils.PropertiesLoader;
 import org.example.utils.testng.RetryAnalyzer;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.util.Properties;
@@ -13,6 +14,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void userShouldLoginWithValidCredentials() {
         loginSteps.loginAsStandardUser();
+        Assert.fail("test");
         assertTrue(productsPage.getTitle().isDisplayed(), "User was not logged in");
     }
 
